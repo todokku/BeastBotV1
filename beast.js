@@ -3,22 +3,15 @@ var fs = require('fs');
 var config = require("./config.js"); //setup config.js with export API_KEY for Google API KEY
 
 function getBeastState() {
-  fs.readFile('beastState.txt', 'utf8', function(err, data) {
-    if (err) throw err;
-    return data;
-});
+return fs.readFileSync('beastState.txt','utf8')
 }
 
 function setBeastState(state) {
-  fs.writeFile ("beastState.txt", state , function(err) {
-    if (err) return false;
-    return true;
-    }
-);
+  fs.writeFileSync("beastState.txt", state);
 }
 
 console.log("beastState: " + getBeastState())
-console.log("setting to hungry: " + setBeastState("hungry"))
+setBeastState("duck")
 console.log("beastState: " + getBeastState())
 
 function latestVideo() {
