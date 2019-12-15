@@ -1,7 +1,7 @@
 # BeastBot, the youtube commentor bot
 ## Trying to win Mr Beast's 1000 dollars for being one of the earliest 10 commenters on his youtube video that comes out on the 19th. 
 
-_*DISCLAIMER* This is not going against any Youtube Guidelines, please do not replicate unless you know what you're doing._
+_*DISCLAIMER* To the best of my knowledge, I am not violating any Youtube Guidelines, please do not replicate unless you know what you're doing._
 
 ## Raw first thoughts and research
 * Set up an interval loop that runs every second as long as we have not already commented on the latest video. Also set up a txt file with just a boolean to show if we have commented on the latest video or not. If time is > 3:59pm ET 19th December 2019, then continue
