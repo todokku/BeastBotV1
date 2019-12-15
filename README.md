@@ -7,6 +7,8 @@ _*DISCLAIMER* To the best of my knowledge, I am not violating any Youtube Guidel
 * Set up an interval loop that runs every second as long as we have not already commented on the latest video. Also set up a txt file with just a boolean to show if we have commented on the latest video or not. If time is > 3:59pm ET 19th December 2019, then continue
 * Write up a function that returns the latest youtube video from Mr. Beast's channel and check if the latest video is not the, "Last To Stop Biking Wins $1,000,000 (Part 4)" video with video id wMuYiLby3-s as that was the previous video and we're looking for the one after this.
 This gives out the latest videos: https://www.googleapis.com/youtube/v3/search?key={your_key_here}&channelId={channel_id_here}&part=snippet,id&order=date&maxResults=20
+https://www.googleapis.com/youtube/v3/search?key=AIzaSyBMwtr0JnYG2fw6jeo8h6xaw0g7VcQHP4g&channelId=UCX6OQ3DkcsbYNE6H8uQQuVA&part=snippet,id&order=date&maxResults=20
+
 * If latest video is the one we want to comment on from the previous function. We call the comment function which takes in parameters videoId and comment
 https://developers.google.com/youtube/v3/docs/commentThreads/insert
 * The bot will comment three times and then set the boolean to true, therefore breaking the loop
