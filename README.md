@@ -1,4 +1,4 @@
-# BeastBot, the youtube commentor bot
+# BeastBot, the angry youtube commentor bot
 ## Trying to win Mr Beast's 1000 dollars for being one of the earliest 10 commenters on his youtube video that comes out on the 19th. 
 
 _*DISCLAIMER* To the best of my knowledge, I am not violating any Youtube Guidelines, please do not replicate unless you know what you're doing._
