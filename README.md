@@ -19,3 +19,5 @@ https://developers.google.com/youtube/v3/docs/commentThreads/insert
 
 ## Precautions
 * Youtube Data API V3 has quota limitations, therefore loop should ideally start running from 3:55PM ET, hopefully MrBeast is on time. Quota is 10,000 requests per day. ( 10,000 requests / 60 seconds ) = 166.666666667 minutes. That would be more than two hours of pinging which is great. 
+  * https://www.youtube.com/watch?v=RjUlmco7v2M
+    * need to use playlist api, current search api call is 100 quota points
