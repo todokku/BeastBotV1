@@ -42,6 +42,19 @@ function execute(videoId) {
 gapi.load("client:auth2", function() {
   gapi.auth2.init({client_id: CLIENT_ID});
 });
+function latestVideoScraper() {
+  let url = "http://labs.wenogk.com/beast.php?id=" + channelID
+  fetch(url)
+  .then(res => res.json())
+  .then((out) => {
+    let title = out.entry[0].title
+    let ytid = out.entry[0].id
+    let videoID = ytid.substring(9,ytid.length);
+    alert("title is" + title + " and video id is " + videoID)
+    //
+  })
+  .catch(err => { throw err });
+}
 function latestVideo() {
 
   let urlOld  = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY +"&channelId="+ channelID +"&part=snippet,id&order=date&maxResults=1"
@@ -74,7 +87,7 @@ counter+=1;
 setStateVal("Checking for new video.")
 latestVideo()
 setCounter(counter)
-if(counter > 5) { return true;}
+//if(counter > 5) { return true;}
 setTimeout(goBeast, 500);
 }
-latestVideo()
+latestVideoRSS()
