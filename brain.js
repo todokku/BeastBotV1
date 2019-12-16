@@ -24,7 +24,7 @@ function execute(videoId) {
         "videoId": videoId,
         "topLevelComment": {
           "snippet": {
-            "textOriginal": "Test"
+            "textOriginal": commentText
           }
         }
       }
@@ -32,6 +32,8 @@ function execute(videoId) {
   })
       .then(function(response) {
               quota+=50;
+              setStateVal("COMMENTED.")
+              commented = true;
               console.log("Response", response);
               console.log("Commented. Hopefully.")
             },
@@ -54,7 +56,6 @@ function latestVideo() {
     if(idVal!=currentLatestVideoID) { //If latest video is different, start commenting function ASAPPPP
       execute(idVal);
       setStateVal("NEW VIDEO UP.");
-      commented = true;
     }
     //
   })
