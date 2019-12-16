@@ -1,3 +1,6 @@
+
+let commented = false;
+let quota = 0;
 function authenticate() {
   return gapi.auth2.getAuthInstance()
       .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
@@ -28,6 +31,7 @@ function execute(videoId) {
     }
   })
       .then(function(response) {
+              quota+=50;
               console.log("Response", response);
               console.log("Commented. Hopefully.")
             },
@@ -38,21 +42,38 @@ gapi.load("client:auth2", function() {
 });
 function latestVideo() {
 
-// change to https://developers.google.com/youtube/v3/docs/channels/list
-  let url  = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY +"&channelId="+ channelID +"&part=snippet,id&order=date&maxResults=1"
+  let urlOld  = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY +"&channelId="+ channelID +"&part=snippet,id&order=date&maxResults=1"
+  let url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + uploadPlaylistID + "&key=" + API_KEY +"&maxResults=1"
+
   fetch(url)
   .then(res => res.json())
   .then((out) => {
-    console.log(out)
-    execute(out.items[0].id.videoId)
+    quota+=3;
+    setLatestTitle(out.items[0].snippet.title);
+    let idVal = out.items[0].snippet.resourceId.videoId;
+    if(idVal!=currentLatestVideoID) { //If latest video is different, start commenting function ASAPPPP
+      execute(idVal);
+      setStateVal("NEW VIDEO UP.");
+      commented = true;
+    }
+    //
   })
   .catch(err => { throw err });
 }
+
 let counter=0;
 function goBeast() {
-$("#state").html("Loop counter: " + counter);
+  setQuota(quota);
+  if(commented) {
+    fetched();
+    return true;
+  }
+  setLatestTitle("");
 counter+=1;
+setStateVal("Checking for new video.")
 latestVideo()
-if(counter > 1) { return true;}
+setCounter(counter)
+if(counter > 5) { return true;}
 setTimeout(goBeast, 500);
 }
+latestVideo()

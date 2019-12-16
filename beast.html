@@ -37,7 +37,7 @@
       z-index: -1;
       border-radius: 10px;
   }
-li {
+li,span {
   color:black;
 }
 #card-header {
@@ -53,10 +53,27 @@ $("#ytlogin").hide();
 $("#fetchButton").show();
 }
 function fetchButtonClick() {
+  goBeast();
   $("#beastFeelz").text("RUN.");
   $("#fetchButton").hide();
   $("#beastState").show();
   $("#beastGif").show();
+}
+function setLatestTitle(title) {
+  $("#latestVideoTitle").text(title);
+}
+
+function setCounter(val) {
+  $("#loopCount").text(val);
+}
+function setStateVal(val) {
+  $("#UI_STATUS").text(val);
+}
+function setQuota(val) {
+  $("#quotaEstimate").text(val);
+}
+function fetched() {
+  console.log("DONEEEEE");
 }
 //goBeast()
 </script>
@@ -73,14 +90,15 @@ function fetchButtonClick() {
 
                       <div class="px-2">
                         <div  class="d-flex justify-content-center w-100" style="display:none;padding:15px;">
-                          <div id="beastState" style="display:none" class="card" style="width: 18rem;">
+                          <div id="beastState" style="display:none" class="card" style="width: 100%;">
                             <div class="card-header" style="color:black">
                               Beast State
                             </div>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Loop Count: 0 </li>
-                              <li class="list-group-item">Current Latest: </li>
-                              <li class="list-group-item">Status: </li>
+                              <li class="list-group-item">Loop Count: <span id="loopCount"></span> </li>
+                              <li class="list-group-item">Status: <span id="UI_STATUS"></span> </li>
+                              <li class="list-group-item">Current Latest Video: <span id="latestVideoTitle"></span></li>
+                              <li class="list-group-item">Quota Estimate: <span id="quotaEstimate"></span></li>
                             </ul>
                           </div>
                         </div>
