@@ -15,6 +15,10 @@ function loadClient() {
     },
             function(err) { console.error("Error loading GAPI client for API", err); });
 }
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute(videoId) {
   return gapi.client.youtube.commentThreads.insert({
@@ -36,6 +40,7 @@ function execute(videoId) {
               commented = true;
               console.log("Response", response);
               console.log("Commented. Hopefully.")
+              openInNewTab("https://www.youtube.com/watch?v=" + videoId);
             },
             function(err) { console.error("Execute error", err); });
 }
@@ -48,9 +53,15 @@ function latestVideoScraper() {
   .then(res => res.json())
   .then((out) => {
     let title = out.entry[0].title
+    setLatestTitle(title)
     let ytid = out.entry[0].id
     let videoID = ytid.substring(9,ytid.length);
-    alert("title is" + title + " and video id is " + videoID)
+    if(videoID!=currentLatestVideoID) { //If latest video is different, start commenting function ASAPPPP
+      execute(videoID);
+      commented= true;
+      setStateVal("NEW VIDEO UP.");
+    }
+    console.log("title is" + title + " and video id is " + videoID)
     //
   })
   .catch(err => { throw err });
@@ -85,9 +96,9 @@ function goBeast() {
   setLatestTitle("");
 counter+=1;
 setStateVal("Checking for new video.")
-latestVideo()
+latestVideo() //latestVideo()
 setCounter(counter)
 //if(counter > 5) { return true;}
 setTimeout(goBeast, 500);
 }
-latestVideoRSS()
+latestVideoScraper()
